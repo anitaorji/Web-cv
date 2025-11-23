@@ -7,8 +7,29 @@ import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
 import ThemeToggle from './components/ThemeToggle.vue'
+import { ref, onMounted } from "vue";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase.ts";
 
+const profile = ref<any>(null);
+
+onMounted(async () => {
+  try {
+    const docRef = doc(db, "profile", "main"); // "main" is document ID
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      profile.value = docSnap.data();
+    } else {
+      console.log("No profile found");
+    }
+  } catch (err) {
+    console.error("Error fetching profile:", err);
+  }
+});
 </script>
+
+
 <template>
   <ThemeToggle />
   <div>
