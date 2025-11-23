@@ -6,17 +6,26 @@ import Projects from './components/Projects.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
-</script>
+import ThemeToggle from './components/ThemeToggle.vue'
 
+</script>
 <template>
+  <ThemeToggle />
   <div>
     <Header />
+    
     <About />
     <Skills />
     <Projects />
     <Contact />
     <Footer />
     <ScrollToTop />
+  </div>
+  <div class="p-6">
+    <h1 class="text-3xl font-bold">{{ profile?.name }}</h1>
+    <p class="text-gray-500 dark:text-gray-300">{{ profile?.title }}</p>
+    <p class="mt-4">{{ profile?.bio }}</p>
+    <p class="mt-2 text-sm">{{ profile?.email }}</p>
   </div>
 </template>
 
